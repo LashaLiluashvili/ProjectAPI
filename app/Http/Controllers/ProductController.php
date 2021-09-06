@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -35,18 +37,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $product = new Product();
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->term = $request->term;
-        $product->description = $request->description;
-        if($product->save())
-        {
-            return new ProductResource($product);
-        }
-
+        return new ProductResource(Product::create($request->validated()));
     }
 
     /**
@@ -79,17 +72,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        $product = Product::findOrfail($id);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->term = $request->term;
-        $product->description = $request->description;
-        if($product->save())
-        {
-            return new ProductResource($product);
-        }
+        return new ProductResource($product->update($request->validated()));
 
     }
 
@@ -99,12 +84,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-        if($product->delete())
-        {
-            return new ProductResource($product);
-        }
+        $product->delete();
+        return response()->json(
+            [
+                "success" => true
+            ]
+        );
     }
 }
