@@ -14,7 +14,7 @@ class ChangeDescriptionNulableToProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('description')->nullable()->change();
+            $table->text('description')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class ChangeDescriptionNulableToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('description')->nullable(false)->change();
+            $table->text('description')->nullable(false)->change();
         });
     }
 }
