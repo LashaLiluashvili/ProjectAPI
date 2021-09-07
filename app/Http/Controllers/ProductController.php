@@ -39,7 +39,11 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return new ProductResource(Product::create($request->validated()));
+        $product = Product::create($request->validated());
+        foreach ($request->get('attributes') as $value) {
+            $product->attributeDetails()->create($value);
+        }
+        return response("true");
     }
 
     /**

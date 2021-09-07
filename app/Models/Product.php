@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $table = 'products';
-    protected $primaryKey = 'id';
-    protected $fillable = ["name","price","term"];
 
-    public function attributeModels()
+    protected $fillable = ["name", "price", "term"];
+
+    // connection to Attribute Model. 
+    public function attributeDetails()
     {
         return $this->hasMany(Attribute::class);
     }

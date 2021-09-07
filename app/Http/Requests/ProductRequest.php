@@ -28,8 +28,13 @@ class ProductRequest extends FormRequest
             'name'=>'required|string',
             'price'=>'required|numeric',
             'term'=>'required|date_format:Y-m-d',
-            'description'=>"nullable|string"
-            
+            'description'=>"nullable|string",
+            'attributes'=>"required|array|min:1",
+            // Add validation on array each element.
+            'attributes.*.key'=>"required|string",
+            // Add validation on array each element.
+            'attributes.*.value'=>"required|string"
+
         ];
     }
 }

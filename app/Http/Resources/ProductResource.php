@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+
 class ProductResource extends JsonResource
 {
     /**
@@ -16,15 +17,17 @@ class ProductResource extends JsonResource
     {
         // return parent::toArray($request);
 
-        // Data is saparated and returned. 
+        // Data is saparated and returned. s
 
-        return  [
+        return [
             'id' => $this->id,
             'name'=>$this->name,
             'price'=>$this->price,
             'term'=>$this->term,
             'description'=>$this->description,
-            'created_at'=>$this->created_at->toDateTimeString()
+            'created_at'=>$this->created_at->toDateTimeString(),
+            'attributeDetails'=>$this->attributeDetails()->get()
         ];
+        
     }
 }

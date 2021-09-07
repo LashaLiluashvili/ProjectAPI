@@ -14,15 +14,16 @@ class CreateAttributesTable extends Migration
     public function up()
     {
         Schema::create('attributes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('attribute_id');
-            $table->string('attribute_key');
-            $table->string('attribute_value');
+            $table->id();
+            $table->foreignId('product_id')->constrained();
+            $table->string('key');
+            $table->string('value');
             $table->timestamps();
-            $table->foreign('attribute_id',)
-            ->references('id')
-            ->on('products')
-            ->onDelete('cascade');
+
+            // $table->foreign('attribute_id',)
+            // ->references('id')
+            // ->on('products')
+            // ->onDelete('cascade');
         });
     }
 

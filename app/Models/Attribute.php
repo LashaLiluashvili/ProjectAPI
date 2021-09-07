@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     use HasFactory;
-    protected $table = 'attributes';
-    protected $primaryKey = 'id';
 
-    public function attribute()
+    protected $fillable = ['product_id', 'key', 'value'];
+
+    // Connection to Product model.
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
