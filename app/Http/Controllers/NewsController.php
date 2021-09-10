@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\NewsRequest;
+use App\Http\Resources\NewsResource;
+use App\Models\News;
 
-
-class ProductController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::with('attributes')->paginate(10);
-        return ProductResource::collection($products);
+        $news = News::paginate(10);
+        return NewsResource::collection($news);
     }
 
     /**
@@ -37,12 +36,14 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(NewsRequest $request)
     {
-        $product = Product::create($request->validated());
-        foreach ($request->get('attributes') as $value) {
-            $product->attributeDetails()->create($value);
-        }
+        $news = News::create($request->validated());
+        
+        $imageResult = $request->file('image')->store('public');
+
+        $news->save();
+
         return response("true");
     }
 
@@ -54,8 +55,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product= Product::findOrFail($id);
-        return new ProductResource($product);
+        $news = News::findOrFail($id);
+        return new NewsResource($news);
     }
 
     /**
@@ -76,10 +77,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, Product $product)
+    public function update(NewsRequest $request, News $news)
     {
-        return new ProductResource($product->update($request->validated()));
-
+        return new NewsResource($news->update($request->validated()));
     }
 
     /**
@@ -88,9 +88,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(News $news)
     {
-        $product->delete();
+        $news->delete();
         return response()->json(
             [
                 "success" => true

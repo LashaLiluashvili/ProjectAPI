@@ -105,6 +105,7 @@ final class Versions
   'voku/portable-ascii' => '1.5.6@80953678b19901e5165c56752d087fc11526017c',
   'webmozart/assert' => '1.10.0@6964c76c7804814a842473e0c8fd15bab0f18e25',
   'barryvdh/laravel-debugbar' => 'v3.6.2@70b89754913fd89fef16d0170a91dbc2a5cd633a',
+  'beyondcode/laravel-query-detector' => '1.5.0@4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07',
   'doctrine/instantiator' => '1.4.0@d56bf6102915de5702778fe20f2de3b2fe570b5b',
   'facade/flare-client-php' => '1.8.1@47b639dc02bcfdfc4ebb83de703856fa01e35f5f',
   'facade/ignition' => '2.12.0@74dcc32a2895a126d1e5f2cd3bbab499cac66db1',
@@ -147,7 +148,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'symfony/debug' => 'v4.4.27@2f9160e92eb64c95da7368c867b663a8e34e980c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'laravel/laravel' => 'dev-master@1adb219be36ad799e5d868092b5cca60d48550c3',
+  'laravel/laravel' => 'dev-master@cfa4731f96e73f5a63d5045a16ea8d687bc5c743',
 );
 
     private function __construct()
