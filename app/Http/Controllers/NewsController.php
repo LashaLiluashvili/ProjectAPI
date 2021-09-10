@@ -36,15 +36,31 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function insert_image(NewsRequest $request)
+    {
+        $imageFile= $request->image;
+
+        $formData= array(
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->image
+        );
+        // $imagePath = $request->file('image')->store('public');
+    }
+
     public function store(NewsRequest $request)
     {
         $news = News::create($request->validated());
-        
-        $imageResult = $request->file('image')->store('public');
+
+        $imagePath = $request->file('image')->store('public');
+
+        $news->image = $imagePath;
 
         $news->save();
 
-        return response("true");
+        return ["imageResult" => $imagePath];
+        // return response("true")
     }
 
     /**
